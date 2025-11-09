@@ -34,32 +34,49 @@ const nearbyAttractions = [
 
 const parkingOptions = [
   {
-    type: 'Valet Parking',
-    location: 'Front entrance on Hollywood Blvd',
-    price: '$15',
+    type: 'Valet Parking (Recommended)',
+    location: '6667 Hollywood Blvd (Entrance on N Cherokee Ave)',
+    address: '6667 Hollywood Boulevard, Los Angeles, CA 90028',
+    price: '$15 (first 3 hours) / $25 (after 3 hours)',
     hours: 'Available during all operating hours',
-    note: 'Complimentary for private events',
+    note: 'Most convenient option. Entrance between Hollywood Blvd and Yucca St.',
+    mapUrl: 'https://maps.google.com/?q=6667+Hollywood+Boulevard+Los+Angeles+CA+90028',
+  },
+  {
+    type: 'Ovation Hollywood Garage',
+    location: '6801 Hollywood Blvd',
+    address: '6801 Hollywood Boulevard, Los Angeles, CA 90028',
+    price: '$2.50/20min • $25 daily max • $11 early bird',
+    hours: '24 hours',
+    note: '5-minute walk. Enter from Highland Ave or Orange Court.',
+    mapUrl: 'https://maps.google.com/?q=6801+Hollywood+Boulevard+Los+Angeles+CA+90028',
+  },
+  {
+    type: 'Las Palmas Garage',
+    location: '1721 N Las Palmas Ave',
+    address: '1721 N Las Palmas Avenue, Los Angeles, CA 90028',
+    price: 'Hourly rates vary',
+    hours: '24 hours',
+    note: 'Closest public garage (295 feet away). Reserve via SpotHero or ParkWhiz.',
+    mapUrl: 'https://maps.google.com/?q=1721+N+Las+Palmas+Avenue+Los+Angeles+CA+90028',
+  },
+  {
+    type: 'Highland Ave Garage',
+    location: '1648 N Highland Ave',
+    address: '1648 N Highland Avenue, Los Angeles, CA 90028',
+    price: 'Hourly rates vary',
+    hours: '24 hours',
+    note: '0.2 miles away. Online reservations available.',
+    mapUrl: 'https://maps.google.com/?q=1648+N+Highland+Avenue+Los+Angeles+CA+90028',
   },
   {
     type: 'Street Parking',
     location: 'Hollywood Blvd & surrounding streets',
-    price: '$2-4/hour',
-    hours: 'Metered until 8:00 PM',
-    note: 'Limited availability during peak hours',
-  },
-  {
-    type: 'Hollywood & Highland Garage',
-    location: '6801 Hollywood Blvd',
-    price: '$3-10 with validation',
-    hours: '24 hours',
-    note: '5-minute walk to restaurant',
-  },
-  {
-    type: 'Ovation Hollywood Parking',
-    location: '6801 Hollywood Blvd',
-    price: '$17 flat rate evenings',
-    hours: '24 hours',
-    note: 'Validation available with $35+ purchase',
+    address: 'Hollywood Boulevard near 6667, Los Angeles, CA 90028',
+    price: '$2-4/hour metered',
+    hours: 'Metered Mon-Sat until 8:00 PM',
+    note: 'Limited availability during peak hours. Check signs for restrictions.',
+    mapUrl: 'https://maps.google.com/?q=Hollywood+Boulevard+Los+Angeles+CA+90028',
   },
 ]
 
@@ -144,17 +161,19 @@ export default function LocationPage() {
                 </div>
               </div>
 
-              {/* Map Placeholder */}
+              {/* Interactive Google Map */}
               <div>
-                <div className="bg-gray-200 rounded-lg h-full min-h-[500px] flex items-center justify-center">
-                  <div className="text-center">
-                    <svg className="w-16 h-16 text-gray-400 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                    </svg>
-                    <p className="text-gray-500 font-inter">Interactive Map</p>
-                    <p className="text-sm text-gray-400 font-inter mt-2">Google Maps integration would go here</p>
-                  </div>
+                <div className="rounded-lg overflow-hidden shadow-xl h-full min-h-[500px]">
+                  <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3304.866837763894!2d-118.33851492393654!3d34.10195971582742!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80c2bf2e64267807%3A0x2a7e5fe3b43b3a0d!2sMusso%20%26%20Frank%20Grill!5e0!3m2!1sen!2sus!4v1700000000000!5m2!1sen!2sus&markers=color:red%7Clabel:M%7C34.101959,-118.336315"
+                    width="100%"
+                    height="100%"
+                    style={{ border: 0, minHeight: '500px' }}
+                    allowFullScreen
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                    title="Musso & Frank Grill Location"
+                  />
                 </div>
               </div>
             </div>
@@ -169,29 +188,43 @@ export default function LocationPage() {
             </h2>
 
             <div className="grid md:grid-cols-2 gap-6">
-              {parkingOptions.map((option) => (
-                <div key={option.type} className="bg-white rounded-lg p-6 shadow-md">
+              {parkingOptions.map((option, index) => (
+                <div key={option.type} className={`bg-white rounded-lg p-6 shadow-md ${index === 0 ? 'border-2 border-heritage-gold' : ''}`}>
                   <h3 className="font-playfair text-lg font-semibold text-rich-black mb-3">
                     {option.type}
                   </h3>
                   <div className="space-y-2 text-sm">
-                    <div className="flex justify-between">
-                      <span className="text-gray-600 font-inter">Location:</span>
-                      <span className="font-inter text-right">{option.location}</span>
+                    <div>
+                      <span className="text-gray-600 font-inter block mb-1">Location:</span>
+                      <span className="font-inter">{option.location}</span>
                     </div>
-                    <div className="flex justify-between">
-                      <span className="text-gray-600 font-inter">Price:</span>
+                    <div>
+                      <span className="text-gray-600 font-inter block mb-1">Price:</span>
                       <span className="font-inter font-semibold text-musso-burgundy">{option.price}</span>
                     </div>
-                    <div className="flex justify-between">
-                      <span className="text-gray-600 font-inter">Hours:</span>
-                      <span className="font-inter text-right">{option.hours}</span>
+                    <div>
+                      <span className="text-gray-600 font-inter block mb-1">Hours:</span>
+                      <span className="font-inter">{option.hours}</span>
                     </div>
                     {option.note && (
-                      <p className="text-gray-500 font-inter italic pt-2 border-t border-gray-200">
+                      <p className="text-gray-500 font-inter italic pt-2 border-t border-gray-200 text-xs">
                         {option.note}
                       </p>
                     )}
+                    <div className="pt-3">
+                      <a
+                        href={option.mapUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 text-musso-burgundy hover:text-heritage-gold font-inter font-medium text-xs transition-colors"
+                      >
+                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                        </svg>
+                        Open in Google Maps
+                      </a>
+                    </div>
                   </div>
                 </div>
               ))}

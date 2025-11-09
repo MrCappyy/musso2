@@ -1,5 +1,4 @@
 import React from 'react'
-import Image from 'next/image'
 import Link from 'next/link'
 import { cn } from '@/lib/utils'
 
@@ -32,11 +31,10 @@ export default function Card({
     <>
       {image && (
         <div className="relative h-48 lg:h-56 overflow-hidden">
-          <Image
+          <img
             src={image}
             alt={imageAlt || title}
-            fill
-            className="object-cover group-hover:scale-110 transition-transform duration-300"
+            className="object-cover group-hover:scale-110 transition-transform duration-300 w-full h-full"
           />
           {badge && (
             <span className="absolute top-4 left-4 px-3 py-1 bg-heritage-gold text-rich-black text-sm font-semibold rounded-full">

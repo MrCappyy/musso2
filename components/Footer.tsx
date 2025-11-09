@@ -1,6 +1,5 @@
 import React from 'react'
 import Link from 'next/link'
-import Image from 'next/image'
 
 const footerLinks = {
   explore: [
@@ -11,28 +10,28 @@ const footerLinks = {
   ],
   about: [
     { name: 'Our Story', href: '/about' },
-    { name: 'Press', href: '/about#press' },
+    { name: 'Press', href: '/press' },
     { name: 'Careers', href: '/careers' },
     { name: 'Contact', href: '/contact' },
   ],
   policies: [
+    { name: 'Accessibility Statement', href: '/accessibility' },
     { name: 'Privacy Policy', href: '/privacy' },
     { name: 'Terms of Service', href: '/terms' },
-    { name: 'Accessibility', href: '/accessibility' },
   ],
 }
 
 const socialLinks = [
-  { name: 'Instagram', href: 'https://instagram.com/mussoandfrank', icon: 'instagram' },
-  { name: 'Facebook', href: 'https://facebook.com/mussoandfrank', icon: 'facebook' },
-  { name: 'Twitter', href: 'https://twitter.com/mussoandfrank', icon: 'twitter' },
+  { name: 'Instagram', href: 'https://www.instagram.com/Mussoandfrankgrill/', icon: 'instagram' },
+  { name: 'Facebook', href: 'https://www.facebook.com/mussoandfrankgrill/', icon: 'facebook' },
+  { name: 'Twitter', href: 'https://x.com/MussoFrankGrill', icon: 'twitter' },
 ]
 
 export default function Footer() {
   const currentYear = new Date().getFullYear()
 
   return (
-    <footer className="bg-rich-black text-white">
+    <footer className="text-white" role="contentinfo">
       {/* Newsletter Section */}
       <div className="bg-musso-burgundy py-12 lg:py-16">
         <div className="section-padding">
@@ -44,15 +43,23 @@ export default function Footer() {
               Subscribe for exclusive offers, event invitations, and a taste of Hollywood history
             </p>
             <form className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
+              <label htmlFor="newsletter-email" className="sr-only">
+                Email address for newsletter
+              </label>
               <input
+                id="newsletter-email"
                 type="email"
+                name="email"
                 placeholder="Enter your email"
                 className="flex-1 px-6 py-3 rounded-md text-rich-black font-inter focus:outline-none focus:ring-2 focus:ring-heritage-gold"
                 required
+                aria-required="true"
+                aria-label="Email address"
               />
               <button
                 type="submit"
                 className="btn bg-heritage-gold text-rich-black hover:bg-opacity-90"
+                aria-label="Subscribe to newsletter"
               >
                 Subscribe
               </button>
@@ -62,13 +69,18 @@ export default function Footer() {
       </div>
 
       {/* Main Footer Content */}
-      <div className="py-12 lg:py-16">
-        <div className="section-padding">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 lg:gap-12">
+      <div className="footer-with-image py-12 lg:py-16">
+        {/* Dark overlay for text readability */}
+        <div className="absolute inset-0 footer-overlay"></div>
+
+        {/* Content wrapper with z-index to appear above overlay */}
+        <div className="relative z-10">
+          <div className="section-padding">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-8 lg:gap-12">
             {/* Brand Column */}
             <div className="lg:col-span-2">
               <Link href="/" className="inline-block mb-6">
-                <Image
+                <img
                   src="/images/logo.svg"
                   alt="Musso & Frank Grill"
                   width={200}
@@ -112,6 +124,24 @@ export default function Footer() {
               </h4>
               <ul className="space-y-3">
                 {footerLinks.about.map((link) => (
+                  <li key={link.name}>
+                    <Link
+                      href={link.href}
+                      className="text-gray-300 hover:text-heritage-gold transition-colors duration-200 font-inter"
+                    >
+                      {link.name}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div>
+              <h4 className="font-playfair font-semibold text-lg mb-4 text-heritage-gold">
+                Legal
+              </h4>
+              <ul className="space-y-3">
+                {footerLinks.policies.map((link) => (
                   <li key={link.name}>
                     <Link
                       href={link.href}
@@ -183,6 +213,7 @@ export default function Footer() {
               </div>
             </div>
           </div>
+        </div>
         </div>
       </div>
     </footer>

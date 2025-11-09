@@ -1,10 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  output: 'export',
   images: {
-    domains: ['localhost'],
-    formats: ['image/avif', 'image/webp'],
-    deviceSizes: [640, 768, 1024, 1280, 1600],
-    imageSizes: [16, 32, 64, 128, 256],
+    unoptimized: true,
   },
 }
 

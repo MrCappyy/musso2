@@ -71,7 +71,8 @@ export default function Section({
               <div className="mt-8 flex justify-center">
                 <Image
                   src="/images/divider.png"
-                  alt="Decorative divider"
+                  alt=""
+                  aria-hidden="true"
                   width={150}
                   height={30}
                   className="opacity-50"

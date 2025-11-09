@@ -1,7 +1,6 @@
 'use client'
 
 import React, { useState } from 'react'
-import Image from 'next/image'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import Hero from '@/components/Hero'
@@ -303,11 +302,10 @@ export default function ShopPage() {
                 {filteredProducts.map((product) => (
                   <div key={product.id} className="bg-white rounded-lg shadow-lg overflow-hidden group">
                     <div className="relative h-64 overflow-hidden bg-gray-100">
-                      <Image
+                      <img
                         src={product.image}
                         alt={product.name}
-                        fill
-                        className="object-cover group-hover:scale-110 transition-transform duration-300"
+                        className="object-cover group-hover:scale-110 transition-transform duration-300 w-full h-full"
                       />
                     </div>
                     <div className="p-6">

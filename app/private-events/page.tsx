@@ -1,42 +1,51 @@
 'use client'
 
 import React, { useState } from 'react'
-import Image from 'next/image'
+
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import Hero from '@/components/Hero'
 import Section from '@/components/Section'
 import Card from '@/components/Card'
 import Button from '@/components/Button'
+import EventSpaceCard from '@/components/EventSpaceCard'
 
 const eventSpaces = [
   {
-    name: 'The Hollywood Room',
-    capacity: '20-50 guests',
-    description: 'Our most prestigious private dining room with original 1919 décor',
-    image: '/images/privateevents-hero.jpg',
-    features: ['Private bar', 'AV equipment', 'Dedicated entrance'],
+    name: 'The Palio Wine Room',
+    capacity: 'Up to 8 guests',
+    description: 'Named for the famed Palio di Siena horse race dating back more than six hundred years, this sumptuously appointed private wine room captures the Old World ambience of Northern Italy. Lined with oak wood paneling, hand-painted murals, temperature-controlled wine cases and handcrafted furniture, the Palio Room is perfect for small parties of eight or less who want a more interactive service experience.\n\nCustomize your event with a menu specially prepared by Executive Chef J. P. Amateau. Choose expert wine pairings with General Manager Andrea Scuto and our sommelier team, then savor the gracious hospitality Musso & Frank is known for.',
+    images: [
+      '/images/PDR_Wine-Room-3-copy-1.jpg',
+      '/images/PDR_Wine-Room-8-copy-1.jpg'
+    ],
+    features: ['Oak wood paneling', 'Hand-painted murals', 'Temperature-controlled wine cases', 'Handcrafted furniture', 'Expert wine pairings'],
   },
   {
-    name: 'The Writers Room',
-    capacity: '10-20 guests',
-    description: 'Intimate space where legendary screenwriters once gathered',
-    image: '/images/light-photo-bg.jpg',
-    features: ['Round table seating', 'Historic memorabilia', 'Wine storage'],
+    name: 'The Grand Private Rooms',
+    capacity: 'Flexible: 14, 28, or 42 guests',
+    description: 'With the capacity to seat up to 42 for dinner, and 65 for cocktail receptions, this high-end private dining space is set aside for larger parties seeking the classic Musso & Frank treatment. New, yet steeped in tradition, this elegant space is impeccably arranged into two midsize or one large space, furnished in custom-crafted oak paneling and hand-painted scenes of the Italian countryside.\n\nConfiguration Options:\n• Private Dining Room 1: Intimate gatherings up to 14 guests\n• Private Dining Room 2: Mid-size events up to 28 guests\n• Combined Grand Room: Large celebrations up to 42 guests (65 for cocktails)\n\nEach configuration features the same exquisite oak paneling, hand-painted murals, and impeccable service. Perfect for board meetings, milestone celebrations, or corporate events.\n\nWork directly with General Manager Andrea Scuto to design your event with a pre-fixe menu and the high level of service celebrated at Musso & Frank for over a hundred years.',
+    images: [
+      '/images/grandprivaterooms.jpg',
+      '/images/pdr1.jpg',
+      '/images/pdr2.jpg',
+      '/images/PDR_Large-Room-5-copy-1.jpg',
+      '/images/PDR_Large-Room-13-copy-1.jpg',
+      '/images/PDR_Board-Room-8-copy-1.jpg',
+      '/images/PDR_Board-Room-10-copy-1.jpg',
+      '/images/PDR_Banquet-Room-5-copy-1.jpg'
+    ],
+    features: ['Flexible capacity: 14, 28, or 42 guests', 'Cocktail capacity for 65', 'Three configuration options', 'Custom oak paneling', 'Italian countryside murals', 'Full bar service', 'AV capabilities', 'Pre-fixe menu options', 'Dedicated event coordinator'],
   },
   {
-    name: 'The Garden Terrace',
-    capacity: '30-75 guests',
-    description: 'Semi-private outdoor space with Hollywood Boulevard views',
-    image: '/images/rewards-hero.jpg',
-    features: ['Outdoor heaters', 'Retractable awning', 'Cocktail setup'],
-  },
-  {
-    name: 'Full Restaurant Buyout',
-    capacity: '150-200 guests',
-    description: 'Exclusive use of the entire restaurant for grand celebrations',
-    image: '/images/homepage-hero-lg.jpg',
-    features: ['Complete privacy', 'Custom menu', 'Valet service included'],
+    name: 'Main Dining Rooms',
+    capacity: 'Up to 300 guests',
+    description: 'We are still delighted to host your large private parties in our world-renown dining rooms, maintaining the highest level of professionalism and discretion. Our dedicated private event team will help you tailor every aspect of your function, from creating the perfect menu to managing floral arrangements, linens, personalized menus and valet parking services.\n\nWe can accommodate up to 300 guests, all with Musso\'s sommelier at your service, and our legendary bar team crafting the best cocktails in town.',
+    images: [
+      '/images/private-event-photo.jpeg',
+      '/images/private-parties-available.jpeg'
+    ],
+    features: ['Grand scale events to 300', 'Complete customization', 'Sommelier service', 'Legendary bar team', 'Valet parking', 'Floral arrangements'],
   },
 ]
 
@@ -53,6 +62,7 @@ const eventTypes = [
 
 export default function PrivateEventsPage() {
   const [formStep, setFormStep] = useState(1)
+  const [formErrors, setFormErrors] = useState<string[]>([])
   const [formData, setFormData] = useState({
     eventType: '',
     date: '',
@@ -76,16 +86,60 @@ export default function PrivateEventsPage() {
       ...prev,
       [name]: value
     }))
+    // Clear errors when user starts typing
+    if (formErrors.length > 0) {
+      setFormErrors([])
+    }
+  }
+
+  const validateStep = (step: number): boolean => {
+    const errors: string[] = []
+
+    if (step === 1) {
+      if (!formData.eventType) errors.push('Event Type is required')
+      if (!formData.date) errors.push('Event Date is required')
+      if (!formData.guestCount) errors.push('Number of Guests is required')
+      if (!formData.startTime) errors.push('Start Time is required')
+      if (!formData.endTime) errors.push('End Time is required')
+      if (!formData.space) errors.push('Please select an Event Space')
+    } else if (step === 2) {
+      if (!formData.firstName) errors.push('First Name is required')
+      if (!formData.lastName) errors.push('Last Name is required')
+      if (!formData.email) errors.push('Email is required')
+      if (formData.email && !formData.email.includes('@')) errors.push('Please enter a valid email address')
+      if (!formData.phone) errors.push('Phone Number is required')
+    } else if (step === 3) {
+      if (!formData.budget) {
+        errors.push('Please enter your estimated budget')
+      } else if (parseInt(formData.budget) < 1500) {
+        errors.push('Budget must be at least $1,500')
+      }
+      if (!formData.menuPreference) errors.push('Please select a Menu Preference')
+    }
+
+    setFormErrors(errors)
+    return errors.length === 0
   }
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    // Handle form submission
-    console.log('Event inquiry submitted:', formData)
+    if (validateStep(3)) {
+      console.log('Event inquiry submitted:', formData)
+      // You could add a success message here
+      alert('Thank you for your inquiry! Our events team will contact you within 24 hours.')
+    }
   }
 
-  const nextStep = () => setFormStep(prev => Math.min(prev + 1, 3))
-  const prevStep = () => setFormStep(prev => Math.max(prev - 1, 1))
+  const nextStep = () => {
+    if (validateStep(formStep)) {
+      setFormStep(prev => Math.min(prev + 1, 3))
+    }
+  }
+
+  const prevStep = () => {
+    setFormErrors([])
+    setFormStep(prev => Math.max(prev - 1, 1))
+  }
 
   return (
     <>
@@ -104,39 +158,16 @@ export default function PrivateEventsPage() {
         {/* Event Spaces */}
         <Section
           background="white"
-          title="Our Event Spaces"
-          subtitle="Distinctive Venues"
-          description="Each space tells its own story of Hollywood glamour"
+          title="The Perfect Space for Every Occasion"
+          subtitle="Three Distinctive Venues"
+          description="Intimate dinners for 8, corporate events for 42, or grand celebrations for 300. Oak-paneled elegance with legendary Musso & Frank service."
         >
-          <div className="grid md:grid-cols-2 gap-8">
-            {eventSpaces.map((space) => (
-              <div key={space.name} className="group">
-                <div className="relative h-64 rounded-lg overflow-hidden mb-4">
-                  <Image
-                    src={space.image}
-                    alt={space.name}
-                    fill
-                    className="object-cover group-hover:scale-110 transition-transform duration-300"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-rich-black/60 to-transparent" />
-                  <div className="absolute bottom-4 left-4 text-white">
-                    <h3 className="font-playfair text-2xl font-semibold">{space.name}</h3>
-                    <p className="font-inter text-sm">{space.capacity}</p>
-                  </div>
-                </div>
-                <p className="text-gray-600 font-crimson mb-3">{space.description}</p>
-                <div className="flex flex-wrap gap-2">
-                  {space.features.map((feature) => (
-                    <span
-                      key={feature}
-                      className="px-3 py-1 bg-classic-cream text-sm font-inter rounded-full"
-                    >
-                      {feature}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            ))}
+          <div className="max-w-4xl mx-auto">
+            <div className="space-y-12">
+              {eventSpaces.map((space) => (
+                <EventSpaceCard key={space.name} space={space} />
+              ))}
+            </div>
           </div>
         </Section>
 
@@ -170,6 +201,18 @@ export default function PrivateEventsPage() {
             <h2 className="heading-md text-center text-musso-burgundy mb-8">
               Request Event Information
             </h2>
+
+            {/* Error Messages */}
+            {formErrors.length > 0 && (
+              <div className="bg-red-50 border border-red-200 rounded-lg p-4 mb-6">
+                <p className="font-inter font-semibold text-red-800 mb-2">Please fix the following errors:</p>
+                <ul className="list-disc list-inside space-y-1">
+                  {formErrors.map((error, index) => (
+                    <li key={index} className="text-red-700 font-inter text-sm">{error}</li>
+                  ))}
+                </ul>
+              </div>
+            )}
 
             {/* Progress Bar */}
             <div className="flex justify-between mb-8">
@@ -389,18 +432,21 @@ export default function PrivateEventsPage() {
                     <label className="block text-sm font-inter font-medium text-rich-black mb-2">
                       Estimated Budget
                     </label>
-                    <select
-                      name="budget"
-                      value={formData.budget}
-                      onChange={handleInputChange}
-                      className="w-full px-4 py-3 rounded-md border border-gray-300 focus:border-heritage-gold focus:ring-2 focus:ring-heritage-gold/20 font-inter"
-                    >
-                      <option value="">Select Budget Range</option>
-                      <option value="5000-10000">$5,000 - $10,000</option>
-                      <option value="10000-25000">$10,000 - $25,000</option>
-                      <option value="25000-50000">$25,000 - $50,000</option>
-                      <option value="50000+">$50,000+</option>
-                    </select>
+                    <div className="relative">
+                      <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 font-inter">$</span>
+                      <input
+                        type="number"
+                        name="budget"
+                        value={formData.budget}
+                        onChange={handleInputChange}
+                        min="1500"
+                        step="100"
+                        placeholder="Enter amount (minimum $1,500)"
+                        className="w-full pl-8 pr-4 py-3 rounded-md border border-gray-300 focus:border-heritage-gold focus:ring-2 focus:ring-heritage-gold/20 font-inter"
+                        required
+                      />
+                    </div>
+                    <p className="text-xs text-gray-600 font-inter mt-1">Minimum budget: $1,500</p>
                   </div>
 
                   <div>

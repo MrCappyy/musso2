@@ -1,5 +1,4 @@
 import React from 'react'
-import Image from 'next/image'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import Hero from '@/components/Hero'
@@ -7,24 +6,75 @@ import Section from '@/components/Section'
 import Card from '@/components/Card'
 import Button from '@/components/Button'
 
-const featuredMenuItems = [
+const hollywoodFavorites = [
   {
-    title: 'Prime Rib',
-    description: 'Our signature cut, slow-roasted to perfection and served with Yorkshire pudding',
-    price: 68,
+    title: 'Sand Dabs with Meunière Sauce',
+    description: 'Frank Sinatra\'s favorite meal and our most popular lunchtime dish since the 1920s. Delicate Pacific sand dabs prepared with classic Meunière sauce.',
+    price: 36,
     image: '/images/product-highlight.png',
+    badge: 'Sinatra\'s Favorite',
   },
   {
-    title: 'Lobster Thermidor',
-    description: 'Classic preparation with brandy cream sauce and gruyere',
-    price: 'Market Price',
+    title: 'Fettuccine Alfredo',
+    description: 'Mary Pickford and Douglas Fairbanks brought this recipe from Rome in 1920, sharing it with our legendary Chef Jean Rue. Fresh pasta made daily in-house.',
+    price: 30,
     image: '/images/product-thumb-highlight.png',
+    badge: 'Hollywood Royalty',
   },
   {
-    title: 'Caesar Salad',
-    description: 'Prepared tableside with our secret dressing recipe from 1924',
-    price: 24,
+    title: 'Grilled Lamb Kidneys with Bacon',
+    description: 'Charlie Chaplin\'s beloved dish, on our menu since 1919. A bold, adventurous choice with parsley-lemon vinaigrette and crispy bacon.',
+    price: 34,
     image: '/images/light-photo-bg.jpg',
+    badge: 'Chaplin\'s Favorite',
+  },
+  {
+    title: 'Chicken Pot Pie',
+    description: 'Our longest-running dish. Detective Harry Bosch stops by every Thursday for it—and so can you. Chef Rue\'s original recipe, available daily.',
+    price: 32,
+    image: '/images/product-highlight.png',
+    badge: 'Thursday\'s Legend',
+  },
+  {
+    title: 'Short Ribs (Flanken Style)',
+    description: 'Our most iconic dish since the 1940s, available Saturdays only. So legendary, we have chefs dedicated to just this dish. Call ahead—we often sell out.',
+    price: 42,
+    image: '/images/product-thumb-highlight.png',
+    badge: 'Saturday\'s Legend',
+  },
+  {
+    title: 'Flannel Cakes',
+    description: 'Domingo Pule\'s legendary paper-thin pancakes, perfected over 50 years. So beloved, they\'ve been shipped across the country to stars like Mila Kunis.',
+    price: 18,
+    image: '/images/light-photo-bg.jpg',
+    badge: 'Made with Love',
+  },
+]
+
+const dailyFeatures = [
+  {
+    day: 'Tuesday',
+    dish: 'Corned Beef and Cabbage'
+  },
+  {
+    day: 'Wednesday',
+    dish: 'Sauerbraten, Potato Pancakes'
+  },
+  {
+    day: 'Thursday',
+    dish: 'Homemade Chicken Pot Pie'
+  },
+  {
+    day: 'Friday',
+    dish: 'Bouillabaisse Marseillaise'
+  },
+  {
+    day: 'Saturday',
+    dish: 'Braised Short Ribs of Beef with Vegetables'
+  },
+  {
+    day: 'Sunday',
+    dish: 'Duck Confit'
   },
 ]
 
@@ -35,7 +85,7 @@ const testimonials = [
     title: 'Los Angeles Times Food Critic'
   },
   {
-    quote: "After 105 years, they still serve the best martini in Hollywood. A true institution.",
+    quote: "After 106 years, they still serve the best martini in Hollywood. A true institution.",
     author: 'Sarah Chen',
     title: 'Zagat Review'
   },
@@ -51,12 +101,12 @@ export default function HomePage() {
     <>
       <Header />
 
-      <main className="pt-20">
+      <main id="main-content" className="pt-20">
         {/* Hero Section */}
         <Hero
           title="Where Hollywood History is Served Daily"
           subtitle="Since 1919"
-          description="Experience the timeless elegance of Hollywood's oldest restaurant, where classic American cuisine meets legendary hospitality"
+          description="Classic American cuisine meets legendary Hollywood hospitality"
           image="/images/homepage-hero-lg.jpg"
           primaryCTA={{ text: 'Make a Reservation', href: '/reservations' }}
           secondaryCTA={{ text: 'View Our Menu', href: '/menu' }}
@@ -92,47 +142,71 @@ export default function HomePage() {
               </div>
             </div>
             <div className="relative h-96 rounded-lg overflow-hidden shadow-xl">
-              <Image
-                src="/images/musso-family.jpg"
-                alt="Musso & Frank interior"
-                fill
-                className="object-cover"
+              <img
+                src="/images/employment-slider-7.jpg"
+                alt="Musso & Frank servers in burgundy jackets standing inside the historic restaurant"
+                className="object-cover w-full h-full"
               />
-              <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-rich-black/80 to-transparent">
-                <Image
-                  src="/images/105-year-logo-2.svg"
-                  alt="105 Years of Excellence"
-                  width={120}
-                  height={60}
-                  className="filter brightness-0 invert"
+              <div className="absolute bottom-6 left-6 w-32 h-32 rounded-full shadow-lg overflow-hidden">
+                <img
+                  src="/images/106-year-logo.jpg"
+                  alt="106 Years of Excellence"
+                  className="object-cover scale-110 w-full h-full"
                 />
               </div>
             </div>
           </div>
         </Section>
 
-        {/* Featured Menu Items */}
+        {/* Daily Features */}
         <Section
           background="pattern"
-          title="Signature Dishes"
-          subtitle="From Our Kitchen"
-          description="Time-honored recipes prepared with the finest ingredients"
+          title="Our Daily Features"
         >
-          <div className="grid md:grid-cols-3 gap-8">
-            {featuredMenuItems.map((item) => (
+          <div className="daily-features-container">
+            <div className="ornamental-text-divider mb-8" aria-hidden="true">
+              ━━━ ◆ ◆ ◆ ━━━
+            </div>
+            <div className="grid md:grid-cols-2 gap-0 daily-features-grid">
+              {dailyFeatures.map((feature) => (
+                <div key={feature.day} className="daily-feature-item">
+                  <p className="daily-feature-day">{feature.day}</p>
+                  <p className="daily-feature-dish">{feature.dish}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </Section>
+
+        {/* Hollywood's Favorites */}
+        <Section
+          background="white"
+          title="Hollywood's Favorites"
+          subtitle="Dishes beloved by legends from the Golden Age to today"
+        >
+          {/* Ornamental Divider */}
+          <div className="ornamental-text-divider mb-12 text-center" aria-hidden="true">
+            ━━━ ◆ ◆ ◆ ━━━
+          </div>
+
+          {/* Responsive Grid: 3 cols (desktop) / 2 cols (tablet) / 1 col (mobile) */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {hollywoodFavorites.map((item) => (
               <Card
                 key={item.title}
                 title={item.title}
                 description={item.description}
                 price={item.price}
                 image={item.image}
+                badge={item.badge}
                 href="/menu"
               />
             ))}
           </div>
+
           <div className="text-center mt-12">
             <Button href="/menu" variant="primary" size="lg">
-              View Full Menu
+              VIEW FULL MENU
             </Button>
           </div>
         </Section>
@@ -140,11 +214,10 @@ export default function HomePage() {
         {/* Private Events CTA */}
         <section className="relative py-24 bg-rich-black">
           <div className="absolute inset-0">
-            <Image
+            <img
               src="/images/privateevents-hero.jpg"
-              alt="Private events at Musso & Frank"
-              fill
-              className="object-cover opacity-30"
+              alt="Elegant private dining room with white tablecloths and classic decor at Musso & Frank Grill"
+              className="object-cover opacity-30 w-full h-full"
             />
           </div>
           <div className="relative section-padding text-center">
@@ -165,7 +238,7 @@ export default function HomePage() {
                 <p className="text-white/80 font-inter">Private Rooms</p>
               </div>
               <div className="text-center">
-                <div className="text-heritage-gold text-4xl font-playfair mb-2">105+</div>
+                <div className="text-heritage-gold text-4xl font-playfair mb-2">106+</div>
                 <p className="text-white/80 font-inter">Years of Hosting</p>
               </div>
             </div>
@@ -205,88 +278,39 @@ export default function HomePage() {
           </div>
         </Section>
 
-        {/* Location & Hours */}
+        {/* Hollywood Legacy */}
         <Section
-          background="cream"
-          title="Visit Us"
-          subtitle="Location & Hours"
+          background="pattern"
+          title="Our Hollywood Legacy"
         >
-          <div className="grid md:grid-cols-2 gap-12">
-            <div className="space-y-8">
-              <div>
-                <h3 className="heading-md text-musso-burgundy mb-4">Location</h3>
-                <p className="body-lg text-gray-700 mb-2">6667 Hollywood Boulevard</p>
-                <p className="body-lg text-gray-700 mb-2">Hollywood, CA 90028</p>
-                <p className="body-lg text-gray-700">(323) 467-7788</p>
+          <div className="max-w-6xl mx-auto">
+            <div className="grid md:grid-cols-2 gap-12 items-center">
+              <div className="relative h-96 rounded-lg overflow-hidden shadow-xl">
+                <img
+                  src="/images/original.avif"
+                  alt="Black and white archival photograph of Musso & Frank Grill's original facade from 1919 on Hollywood Boulevard"
+                  className="object-cover sepia-[.2] w-full h-full"
+                />
               </div>
-              <div>
-                <h3 className="heading-md text-musso-burgundy mb-4">Hours</h3>
-                <div className="space-y-2">
-                  <div className="flex justify-between">
-                    <span className="font-inter font-medium">Monday - Thursday</span>
-                    <span className="font-inter">11:00 AM - 10:00 PM</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="font-inter font-medium">Friday - Saturday</span>
-                    <span className="font-inter">11:00 AM - 11:00 PM</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="font-inter font-medium">Sunday</span>
-                    <span className="font-inter">4:00 PM - 10:00 PM</span>
-                  </div>
+              <div className="text-center md:text-left space-y-6">
+                <p className="text-2xl leading-relaxed font-crimson text-gray-700">
+                  For over a century, Musso & Frank has been the heartbeat of Hollywood,
+                  where legends were made and deals were sealed over martinis. From Charlie
+                  Chaplin to modern-day stars, our red leather booths have witnessed the
+                  evolution of entertainment history.
+                </p>
+                <div className="text-heritage-gold font-playfair text-5xl font-light tracking-wider">
+                  EST. 1919
+                </div>
+                <div className="pt-4">
+                  <Button href="/about" variant="primary" size="lg">
+                    Discover Our History
+                  </Button>
                 </div>
               </div>
-              <div className="flex gap-4">
-                <Button href="/location" variant="primary">
-                  Get Directions
-                </Button>
-                <Button href="/reservations" variant="outline">
-                  Make Reservation
-                </Button>
-              </div>
-            </div>
-            <div className="relative h-96 rounded-lg overflow-hidden shadow-xl">
-              <Image
-                src="/images/light-photo-bg.jpg"
-                alt="Musso & Frank exterior"
-                fill
-                className="object-cover"
-              />
             </div>
           </div>
         </Section>
-
-        {/* Newsletter CTA */}
-        <section className="relative py-16 lg:py-20">
-          <div className="absolute inset-0">
-            <Image
-              src="/images/newsletter-hero-sm.jpg"
-              alt="Newsletter background"
-              fill
-              className="object-cover"
-            />
-            <div className="absolute inset-0 bg-rich-black/70" />
-          </div>
-          <div className="relative section-padding text-center">
-            <h2 className="heading-md text-white mb-4">
-              Stay Connected
-            </h2>
-            <p className="body-lg text-white/90 max-w-2xl mx-auto mb-8">
-              Join our mailing list for exclusive offers, event invitations, and a taste of Hollywood history
-            </p>
-            <form className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
-              <input
-                type="email"
-                placeholder="Enter your email"
-                className="flex-1 px-6 py-3 rounded-md text-rich-black font-inter focus:outline-none focus:ring-2 focus:ring-heritage-gold"
-                required
-              />
-              <Button type="submit" variant="secondary" size="md">
-                Subscribe
-              </Button>
-            </form>
-          </div>
-        </section>
       </main>
 
       <Footer />

@@ -201,7 +201,20 @@ export default function ContactPage() {
                     <Button type="submit" variant="primary" size="lg">
                       Send Message
                     </Button>
-                    <Button type="button" variant="outline" size="lg">
+                    <Button
+                      type="button"
+                      variant="outline"
+                      size="lg"
+                      onClick={() => setFormData({
+                        firstName: '',
+                        lastName: '',
+                        email: '',
+                        phone: '',
+                        reason: '',
+                        message: '',
+                        newsletter: false,
+                      })}
+                    >
                       Clear Form
                     </Button>
                   </div>
@@ -251,7 +264,7 @@ export default function ContactPage() {
                       <h4 className="font-playfair font-semibold text-lg mb-3">Follow Us</h4>
                       <div className="flex gap-3">
                         <a
-                          href="https://instagram.com/mussoandfrank"
+                          href="https://www.instagram.com/Mussoandfrankgrill/"
                           target="_blank"
                           rel="noopener noreferrer"
                           className="w-10 h-10 bg-musso-burgundy text-white rounded-full flex items-center justify-center hover:bg-heritage-gold transition-colors"
@@ -262,7 +275,7 @@ export default function ContactPage() {
                           </svg>
                         </a>
                         <a
-                          href="https://facebook.com/mussoandfrank"
+                          href="https://www.facebook.com/mussoandfrankgrill/"
                           target="_blank"
                           rel="noopener noreferrer"
                           className="w-10 h-10 bg-musso-burgundy text-white rounded-full flex items-center justify-center hover:bg-heritage-gold transition-colors"
@@ -273,7 +286,7 @@ export default function ContactPage() {
                           </svg>
                         </a>
                         <a
-                          href="https://twitter.com/mussoandfrank"
+                          href="https://x.com/MussoFrankGrill"
                           target="_blank"
                           rel="noopener noreferrer"
                           className="w-10 h-10 bg-musso-burgundy text-white rounded-full flex items-center justify-center hover:bg-heritage-gold transition-colors"

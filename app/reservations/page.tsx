@@ -1,57 +1,22 @@
 'use client'
 
-import React, { useState } from 'react'
+import React, { useEffect } from 'react'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import Hero from '@/components/Hero'
 import Section from '@/components/Section'
-import Button from '@/components/Button'
-import { cn } from '@/lib/utils'
 
 export default function ReservationsPage() {
-  const [formData, setFormData] = useState({
-    date: '',
-    time: '',
-    partySize: '2',
-    firstName: '',
-    lastName: '',
-    email: '',
-    phone: '',
-    occasion: '',
-    specialRequests: ''
-  })
+  useEffect(() => {
+    // Check if widget already exists
+    const container = document.getElementById('opentable-container')
+    if (!container || container.children.length > 0) return
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }))
-  }
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    // Handle form submission - would integrate with Resy/OpenTable API
-    console.log('Reservation submitted:', formData)
-  }
-
-  const occasions = [
-    'No Special Occasion',
-    'Birthday',
-    'Anniversary',
-    'Date Night',
-    'Business Meal',
-    'Celebration'
-  ]
-
-  const times = [
-    '11:00 AM', '11:30 AM', '12:00 PM', '12:30 PM',
-    '1:00 PM', '1:30 PM', '2:00 PM', '2:30 PM',
-    '3:00 PM', '3:30 PM', '4:00 PM', '4:30 PM',
-    '5:00 PM', '5:30 PM', '6:00 PM', '6:30 PM',
-    '7:00 PM', '7:30 PM', '8:00 PM', '8:30 PM',
-    '9:00 PM', '9:30 PM'
-  ]
+    const script = document.createElement('script')
+    script.type = 'text/javascript'
+    script.src = '//www.opentable.com/widget/reservation/loader?rid=203986&type=standard&theme=wide&color=1&dark=false&iframe=true&domain=com&lang=en-US&newtab=false&ot_source=Restaurant%20website&cfe=true'
+    container.appendChild(script)
+  }, [])
 
   return (
     <>
@@ -67,179 +32,24 @@ export default function ReservationsPage() {
         />
 
         <Section background="white">
-          <div className="max-w-4xl mx-auto">
-            {/* Reservation Form */}
-            <div className="bg-classic-cream rounded-lg p-8 lg:p-12 shadow-xl">
-              <h2 className="heading-md text-center text-musso-burgundy mb-8">
+          <div className="flex flex-col items-center">
+            {/* OpenTable Widget Container - Compact size for 850x350 widget */}
+            <div className="bg-classic-cream rounded-lg shadow-xl px-4 pt-4 pb-8" style={{width: '882px'}}>
+              <h2 className="heading-md text-center text-musso-burgundy mb-1">
                 Book Your Experience
               </h2>
+              <p className="text-center text-gray-600 font-crimson text-lg mb-1">
+                Reserve your table at Hollywood's most storied restaurant
+              </p>
 
-              <form onSubmit={handleSubmit} className="space-y-6">
-                {/* Date, Time, Party Size Row */}
-                <div className="grid md:grid-cols-3 gap-4">
-                  <div>
-                    <label className="block text-sm font-inter font-medium text-rich-black mb-2">
-                      Date
-                    </label>
-                    <input
-                      type="date"
-                      name="date"
-                      value={formData.date}
-                      onChange={handleInputChange}
-                      min={new Date().toISOString().split('T')[0]}
-                      className="w-full px-4 py-3 rounded-md border border-gray-300 focus:border-heritage-gold focus:ring-2 focus:ring-heritage-gold/20 font-inter"
-                      required
-                    />
-                  </div>
-
-                  <div>
-                    <label className="block text-sm font-inter font-medium text-rich-black mb-2">
-                      Time
-                    </label>
-                    <select
-                      name="time"
-                      value={formData.time}
-                      onChange={handleInputChange}
-                      className="w-full px-4 py-3 rounded-md border border-gray-300 focus:border-heritage-gold focus:ring-2 focus:ring-heritage-gold/20 font-inter"
-                      required
-                    >
-                      <option value="">Select Time</option>
-                      {times.map(time => (
-                        <option key={time} value={time}>{time}</option>
-                      ))}
-                    </select>
-                  </div>
-
-                  <div>
-                    <label className="block text-sm font-inter font-medium text-rich-black mb-2">
-                      Party Size
-                    </label>
-                    <select
-                      name="partySize"
-                      value={formData.partySize}
-                      onChange={handleInputChange}
-                      className="w-full px-4 py-3 rounded-md border border-gray-300 focus:border-heritage-gold focus:ring-2 focus:ring-heritage-gold/20 font-inter"
-                      required
-                    >
-                      {[...Array(20)].map((_, i) => (
-                        <option key={i + 1} value={i + 1}>
-                          {i + 1} {i === 0 ? 'Guest' : 'Guests'}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-                </div>
-
-                {/* Name Row */}
-                <div className="grid md:grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-sm font-inter font-medium text-rich-black mb-2">
-                      First Name
-                    </label>
-                    <input
-                      type="text"
-                      name="firstName"
-                      value={formData.firstName}
-                      onChange={handleInputChange}
-                      className="w-full px-4 py-3 rounded-md border border-gray-300 focus:border-heritage-gold focus:ring-2 focus:ring-heritage-gold/20 font-inter"
-                      required
-                    />
-                  </div>
-
-                  <div>
-                    <label className="block text-sm font-inter font-medium text-rich-black mb-2">
-                      Last Name
-                    </label>
-                    <input
-                      type="text"
-                      name="lastName"
-                      value={formData.lastName}
-                      onChange={handleInputChange}
-                      className="w-full px-4 py-3 rounded-md border border-gray-300 focus:border-heritage-gold focus:ring-2 focus:ring-heritage-gold/20 font-inter"
-                      required
-                    />
-                  </div>
-                </div>
-
-                {/* Contact Row */}
-                <div className="grid md:grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-sm font-inter font-medium text-rich-black mb-2">
-                      Email
-                    </label>
-                    <input
-                      type="email"
-                      name="email"
-                      value={formData.email}
-                      onChange={handleInputChange}
-                      className="w-full px-4 py-3 rounded-md border border-gray-300 focus:border-heritage-gold focus:ring-2 focus:ring-heritage-gold/20 font-inter"
-                      required
-                    />
-                  </div>
-
-                  <div>
-                    <label className="block text-sm font-inter font-medium text-rich-black mb-2">
-                      Phone
-                    </label>
-                    <input
-                      type="tel"
-                      name="phone"
-                      value={formData.phone}
-                      onChange={handleInputChange}
-                      className="w-full px-4 py-3 rounded-md border border-gray-300 focus:border-heritage-gold focus:ring-2 focus:ring-heritage-gold/20 font-inter"
-                      required
-                    />
-                  </div>
-                </div>
-
-                {/* Occasion */}
-                <div>
-                  <label className="block text-sm font-inter font-medium text-rich-black mb-2">
-                    Special Occasion (Optional)
-                  </label>
-                  <select
-                    name="occasion"
-                    value={formData.occasion}
-                    onChange={handleInputChange}
-                    className="w-full px-4 py-3 rounded-md border border-gray-300 focus:border-heritage-gold focus:ring-2 focus:ring-heritage-gold/20 font-inter"
-                  >
-                    {occasions.map(occasion => (
-                      <option key={occasion} value={occasion}>{occasion}</option>
-                    ))}
-                  </select>
-                </div>
-
-                {/* Special Requests */}
-                <div>
-                  <label className="block text-sm font-inter font-medium text-rich-black mb-2">
-                    Special Requests (Optional)
-                  </label>
-                  <textarea
-                    name="specialRequests"
-                    value={formData.specialRequests}
-                    onChange={handleInputChange}
-                    rows={4}
-                    placeholder="Dietary restrictions, seating preferences, or other special requests..."
-                    className="w-full px-4 py-3 rounded-md border border-gray-300 focus:border-heritage-gold focus:ring-2 focus:ring-heritage-gold/20 font-inter resize-none"
-                  />
-                </div>
-
-                {/* Submit Button */}
-                <div className="text-center pt-4">
-                  <Button
-                    type="submit"
-                    variant="primary"
-                    size="lg"
-                    className="min-w-[200px]"
-                  >
-                    Complete Reservation
-                  </Button>
-                </div>
-              </form>
+              {/* OpenTable widget - 850x350 */}
+              <div id="opentable-container" className="flex justify-center -mb-56">
+                {/* OpenTable widget loads here */}
+              </div>
             </div>
 
             {/* Important Information */}
-            <div className="mt-12 grid md:grid-cols-3 gap-6">
+            <div className="mt-8 grid md:grid-cols-3 gap-6 max-w-4xl">
               <div className="text-center">
                 <div className="w-12 h-12 bg-heritage-gold/20 rounded-full flex items-center justify-center mx-auto mb-4">
                   <svg className="w-6 h-6 text-heritage-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">

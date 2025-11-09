@@ -1,4 +1,6 @@
 import type { Metadata, Viewport } from 'next'
+import Script from 'next/script'
+import StaticPinProtection from '@/components/StaticPinProtection'
 import './globals.css'
 
 export const metadata: Metadata = {
@@ -60,7 +62,13 @@ export default function RootLayout({
         <link rel="manifest" href="/manifest.json" />
       </head>
       <body className="antialiased">
-        {children}
+        <StaticPinProtection>
+          {children}
+        </StaticPinProtection>
+        <Script
+          src="https://website-widgets.pages.dev/dist/sienna.min.js"
+          strategy="afterInteractive"
+        />
       </body>
     </html>
   )

@@ -1,36 +1,31 @@
 import React from 'react'
-import Image from 'next/image'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import Hero from '@/components/Hero'
 import Section from '@/components/Section'
 import Button from '@/components/Button'
+import EmployeeCarousel from '@/components/EmployeeCarousel'
 
 const timelineEvents = [
   {
     year: '1919',
     title: 'The Beginning',
-    description: 'Frank Toulet, Joseph Musso, and French chef Jean Rue open Musso & Frank Grill on Hollywood Boulevard.',
+    description: 'September 27, 1919: Frank Toulet, Joseph Musso, and French chef Jean Rue open Musso & Frank Grill on Hollywood Boulevard.',
   },
   {
     year: '1927',
-    title: 'The Golden Age',
-    description: 'Charlie Chaplin becomes a regular. The Back Room becomes the unofficial headquarters for Hollywood dealmaking.',
+    title: 'Family Ownership Begins',
+    description: 'Joseph Carissimi and John Mosso purchase the restaurant, beginning a family tradition that continues today.',
   },
   {
-    year: '1936',
+    year: '1934',
+    title: 'The Back Room Opens',
+    description: 'The Back Room opens, becoming the unofficial headquarters for Hollywood dealmaking and attracting legendary patrons like Charlie Chaplin.',
+  },
+  {
+    year: '1930s-1940s',
     title: 'Literary Haven',
-    description: 'Writers including F. Scott Fitzgerald, William Faulkner, and John Steinbeck make our booths their office.',
-  },
-  {
-    year: '1955',
-    title: 'Television Era',
-    description: 'As Hollywood embraces television, producers and stars from the new medium join our clientele.',
-  },
-  {
-    year: '1971',
-    title: 'New Ownership',
-    description: 'The Echeverria and Mejia families take ownership, maintaining traditions while modernizing service.',
+    description: 'Writers including F. Scott Fitzgerald, William Faulkner, Ernest Hemingway, Raymond Chandler, John Steinbeck, and Charles Bukowski make our booths their office.',
   },
   {
     year: '1989',
@@ -40,12 +35,17 @@ const timelineEvents = [
   {
     year: '2019',
     title: 'Centennial Celebration',
-    description: 'We celebrate 100 years of service with special events and the release of our first cookbook.',
+    description: 'We celebrate 100 years of service with the release of "The Musso & Frank Grill" book by Michael Callahan with introduction by Michael Connelly.',
   },
   {
-    year: '2024',
-    title: '105 Years Strong',
-    description: 'Continuing our legacy as Hollywood\'s gathering place, now in our 105th year of operation.',
+    year: '2020',
+    title: 'Award-Winning Book',
+    description: 'The Musso & Frank Grill book wins the Gold Medal in the Independent Publisher Book Awards.',
+  },
+  {
+    year: '2025',
+    title: '106 Years Strong',
+    description: 'Now in our 106th year, the fourth generation leads the restaurant with Mark Echeverria as Chief Operating Officer.',
   },
 ]
 
@@ -66,24 +66,69 @@ const famousPatrons = [
 
 const awards = [
   {
-    year: '2023',
-    award: 'James Beard America\'s Classics Award',
-    description: 'Recognized for timeless appeal and quality food that reflects the character of the community',
-  },
-  {
-    year: '2022',
-    award: 'Michelin Guide Recommendation',
-    description: 'Featured in the Michelin Guide California for exceptional dining experience',
-  },
-  {
-    year: '2021',
-    award: 'Wine Spectator Award of Excellence',
-    description: 'Honored for our outstanding wine program and cellar selection',
-  },
-  {
     year: '2020',
-    award: 'Los Angeles Times Restaurant of the Year',
-    description: 'Named as an essential Los Angeles dining institution',
+    award: 'Independent Publisher Book Awards - Gold Medal',
+    description: 'Our book "The Musso & Frank Grill" wins the prestigious Gold Medal in the Independent Publisher Book Awards',
+  },
+  {
+    year: '2019-2025',
+    award: 'Wine Spectator Award of Excellence',
+    description: 'Consistently honored for our outstanding wine program featuring 450+ exceptional wines',
+  },
+  {
+    year: '2019',
+    award: 'Centennial Celebration & Book Release',
+    description: 'Published "The Musso & Frank Grill" by Michael Callahan with introduction by novelist Michael Connelly',
+  },
+  {
+    year: '1989',
+    award: 'Los Angeles Historic-Cultural Monument',
+    description: 'Officially designated as a Los Angeles Historic-Cultural Monument, recognizing our significance to the city',
+  },
+]
+
+const employees = [
+  {
+    name: 'Ruben',
+    role: 'serving since 1967',
+    quote: 'Keith (Richards) gave me a 1954 Gibson guitar and signed it "To my fatso amigo."',
+    image: '/images/musso-employee-ruban.jpg',
+  },
+  {
+    name: 'Sergio',
+    role: 'serving since 1972',
+    quote: 'People ask me if we age the steaks; I tell them yes, but not as long as we age the servers.',
+    image: '/images/musso-employee-sergio.jpg',
+  },
+  {
+    name: 'Louie (Retired)',
+    role: 'serving since 1957',
+    quote: 'In 54 years, I have served 10s of thousands of customers at Musso\'s, and every single one was special!',
+    image: '/images/musso-employee-louie.jpg',
+  },
+  {
+    name: 'Manny',
+    role: 'serving since 1989',
+    quote: 'I have been a bartender in Hollywood for 58 years, 22 of them at Musso\'s. When guests come to the bar they tell me they hear I make the best martini in America. I tell them; "You be the judge."',
+    image: '/images/musso-employee-manny.jpg',
+  },
+  {
+    name: 'Peter',
+    role: 'Maitre d',
+    quote: 'We never think of our guests as customers – just new and old friends coming in to enjoy themselves... and a great dinner.',
+    image: '/images/musso-employee-peter.jpg',
+  },
+  {
+    name: 'Andrea',
+    role: 'General Manager',
+    quote: 'Being part of the team at Musso\'s is for me an emotional experience, since I read about this magical place in my favorite novelist\'s books. I knew about Musso\'s even before I imagined to venture in the restaurant Business. I\'m honored to be a part of this legacy.',
+    image: '/images/musso-employee-andrea.jpg',
+  },
+  {
+    name: 'Mark',
+    role: 'Chief Executive Officer, Fourth Generation',
+    quote: 'Musso\'s is a place where you feel comfortable, like you belong, always has been and always will be. When you step through the doors of The Musso & Frank Grill, you are part of our family.',
+    image: '/images/musso-employee-mark.jpg',
   },
 ]
 
@@ -92,11 +137,11 @@ export default function AboutPage() {
     <>
       <Header />
 
-      <main className="pt-20">
+      <main id="main-content" className="pt-20">
         <Hero
           title="Our Story"
-          subtitle="Since 1919"
-          description="More than a restaurant, we're a living piece of Hollywood history"
+          subtitle="Since September 27, 1919"
+          description="Hollywood's oldest restaurant—a living piece of cinema history"
           image="/images/homepage-hero-lg.jpg"
           height="medium"
         />
@@ -105,48 +150,47 @@ export default function AboutPage() {
         <Section background="white">
           <div className="max-w-4xl mx-auto">
             <div className="text-center mb-12">
-              <Image
-                src="/images/105-year-logo-2.svg"
-                alt="105 Years of Excellence"
+              <img
+                src="/images/106-year-logo.jpg"
+                alt="106 Years of Excellence"
                 width={200}
                 height={100}
                 className="mx-auto mb-8"
               />
               <h2 className="heading-lg text-musso-burgundy mb-6">
-                105 Years of Hollywood History
+                106 Years of Hollywood History
               </h2>
               <p className="body-lg text-gray-700">
                 When Frank Toulet, Joseph Musso, and French chef Jean Rue opened the doors of
-                Musso & Frank Grill in 1919, they created more than a restaurant—they established
-                a Hollywood institution. For over a century, we've been the gathering place for
+                Musso & Frank Grill on September 27, 1919, they created more than a restaurant—they established
+                Hollywood's oldest restaurant. For over a century, we've been the gathering place for
                 artists, writers, actors, and dreamers who shaped the entertainment capital of the world.
               </p>
             </div>
 
-            <div className="grid md:grid-cols-2 gap-12 items-center">
-              <div>
-                <h3 className="heading-md text-musso-burgundy mb-4">
-                  The Original Vision
-                </h3>
-                <p className="body-md text-gray-700 mb-4">
-                  Our founders envisioned a place where quality never compromises, where every
-                  guest is treated like family, and where the atmosphere tells a thousand stories.
-                  That vision remains unchanged today.
-                </p>
-                <p className="body-md text-gray-700 mb-4">
-                  From our hand-carved steaks to our legendary martinis, every element of the
-                  Musso & Frank experience has been carefully preserved and passed down through
-                  generations of dedicated staff, some of whom have served here for over 40 years.
-                </p>
-              </div>
-              <div className="relative h-96 rounded-lg overflow-hidden shadow-xl">
-                <Image
-                  src="/images/musso-family.jpg"
-                  alt="Historic Musso & Frank"
-                  fill
-                  className="object-cover"
+            <div>
+              <h3 className="heading-md text-musso-burgundy mb-8">
+                A Family Tradition
+              </h3>
+              <div className="float-right ml-8 mb-8 w-full md:w-3/5 rounded-lg overflow-hidden shadow-xl">
+                <img
+                  src="/images/history-hero.jpg"
+                  alt="Interior view of Musso & Frank Grill showing red leather booths and vintage Hollywood atmosphere"
+                  className="w-full h-auto"
                 />
               </div>
+              <p className="body-md text-gray-700 mb-4">
+                In 1927, Joseph Carissimi and John Mosso purchased the restaurant from the original founders,
+                beginning a family tradition that continues today. The Back Room opened in 1934, becoming the
+                unofficial headquarters for Hollywood dealmaking.
+              </p>
+              <p className="body-md text-gray-700">
+                Today, the families of John Mosso's three granddaughters—Steve and Anne Jones, John and Cathy
+                Echeverria, and Richard and Kristen Kohlmeyer—are the proud owners, with John's great-grandson
+                Mark Echeverria leading the fourth generation as Chief Executive Officer. For 106 years, from our
+                classic recipes including the original 1914 fettucine Alfredo to our legendary martinis, every
+                element has been carefully preserved.
+              </p>
             </div>
           </div>
         </Section>
@@ -213,12 +257,9 @@ export default function AboutPage() {
               ))}
             </div>
 
-            <blockquote className="text-xl font-playfair italic text-gray-700 mb-4">
-              "When I want to know what's really happening in Hollywood, I go to Musso's.
-              The walls have ears, and the martinis loosen tongues."
-            </blockquote>
-            <p className="font-inter text-gray-500">
-              — Orson Welles, 1941
+            <p className="body-lg text-gray-700">
+              For over a century, these red leather booths have been the setting for countless Hollywood
+              stories, literary masterpieces, and legendary conversations that shaped entertainment history.
             </p>
           </div>
         </Section>
@@ -258,13 +299,12 @@ export default function AboutPage() {
         <Section background="white">
           <div className="max-w-4xl mx-auto text-center">
             <h2 className="heading-md text-musso-burgundy mb-8">
-              Our Dedicated Team
+              Our Team
             </h2>
             <p className="body-lg text-gray-700 mb-12">
-              The heart of Musso & Frank is our team. Many of our servers, bartenders, and
-              chefs have been with us for decades, carrying forward our traditions with pride
-              and dedication. When you dine with us, you're served by the best in the business—
-              professionals who understand that hospitality is an art form.
+              Many of our servers, bartenders, and chefs have been with us for decades, carrying forward
+              our traditions with pride and dedication. When you dine with us, you're served by the best
+              in the business—professionals who understand that hospitality is an art form.
             </p>
             <div className="grid md:grid-cols-3 gap-8 mb-12">
               <div>
@@ -272,11 +312,11 @@ export default function AboutPage() {
                 <p className="font-inter text-gray-600">Years of service (longest-serving employee)</p>
               </div>
               <div>
-                <div className="text-4xl font-playfair text-heritage-gold mb-2">75</div>
-                <p className="font-inter text-gray-600">Dedicated team members</p>
+                <div className="text-4xl font-playfair text-heritage-gold mb-2">106</div>
+                <p className="font-inter text-gray-600">Years serving Hollywood</p>
               </div>
               <div>
-                <div className="text-4xl font-playfair text-heritage-gold mb-2">3</div>
+                <div className="text-4xl font-playfair text-heritage-gold mb-2">4</div>
                 <p className="font-inter text-gray-600">Generations of family ownership</p>
               </div>
             </div>
@@ -286,25 +326,67 @@ export default function AboutPage() {
           </div>
         </Section>
 
-        {/* Press Section */}
-        <Section background="pattern" id="press">
-          <div className="max-w-4xl mx-auto text-center">
-            <h2 className="heading-md text-musso-burgundy mb-8">
-              Press & Media
+        {/* Meet The Family */}
+        <Section background="pattern">
+          <div className="max-w-6xl mx-auto">
+            <h2 className="heading-lg text-center text-musso-burgundy mb-12">
+              Meet The Family
             </h2>
-            <p className="body-lg text-gray-700 mb-8">
-              Our story has been told in countless publications, documentaries, and films.
-              We've been featured as a location in over 50 movies and television shows,
-              cementing our place in Hollywood's cultural landscape.
-            </p>
-            <div className="flex flex-wrap justify-center gap-4">
-              <Button variant="primary">
-                Download Press Kit
-              </Button>
-              <Button variant="outline">
-                Media Inquiries
-              </Button>
+
+            <div className="grid md:grid-cols-2 gap-12 items-center mb-12">
+              <div className="relative h-96 rounded-lg overflow-hidden shadow-xl">
+                <img
+                  src="/images/the-family.jpg"
+                  alt="The fourth generation Musso & Frank family owners gathered together at the historic restaurant"
+                  className="object-cover w-full h-full"
+                />
+              </div>
+              <div>
+                <p className="body-lg text-gray-700 mb-6">
+                  Today owned by families of three granddaughters of John Mosso: Steve and Anne Jones,
+                  John and Cathy Echeverria, and Richard and Kristen Kohlmeyer. Mark Echeverria,
+                  John Mosso's great grandson, serves as Chief Executive Officer.
+                </p>
+              </div>
             </div>
+
+            <div className="grid md:grid-cols-2 gap-8">
+              <div className="bg-white p-8 rounded-lg shadow-md">
+                <h3 className="font-playfair text-xl font-semibold text-musso-burgundy mb-4">
+                  The Founding Generation
+                </h3>
+                <p className="body-md text-gray-700">
+                  John Mosso was born in Turin, Italy in 1888, and was brought to the United States
+                  in 1922 by Joseph Carrissimi and his wife Rose, John's older sister. He immediately
+                  went to work for the two men who had earlier founded the Grill, Joseph Musso and
+                  Frank Toulet. Because the restaurant was not making money, they were willing to
+                  sell to John Mosso and Joseph Carrissimi in 1927 for a price rumored to be $25,000.
+                </p>
+              </div>
+
+              <div className="bg-white p-8 rounded-lg shadow-md">
+                <h3 className="font-playfair text-xl font-semibold text-musso-burgundy mb-4">
+                  Generations of Excellence
+                </h3>
+                <p className="body-md text-gray-700">
+                  Rose Keegel, John's daughter, was active in the business in the 40's, 50's and 60's,
+                  as was Edith Carissimi, Joseph's daughter. In the 70's and 80's, Rose's three daughters
+                  and Edith's son began working in the business together. Today, third generation family
+                  members, all of whom worked at Musso's growing up, are joined by the fourth generation,
+                  including Mark Echeverria, who serves as Chief Executive Officer.
+                </p>
+              </div>
+            </div>
+          </div>
+        </Section>
+
+        {/* Employee Testimonials */}
+        <Section background="white">
+          <div className="max-w-7xl mx-auto">
+            <h2 className="heading-md text-center text-musso-burgundy mb-12">
+              Voices from Our Team
+            </h2>
+            <EmployeeCarousel employees={employees} />
           </div>
         </Section>
 

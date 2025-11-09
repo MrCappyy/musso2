@@ -2,15 +2,14 @@
 
 import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
-import Image from 'next/image'
 import { cn } from '@/lib/utils'
 
 const navigation = [
-  { name: 'Reservations', href: '/reservations' },
   { name: 'Menu', href: '/menu' },
   { name: 'Private Events', href: '/private-events' },
   { name: 'Our Story', href: '/about' },
   { name: 'Shop', href: '/shop' },
+  { name: 'Press', href: '/press' },
   { name: 'Location', href: '/location' },
 ]
 
@@ -30,20 +29,19 @@ export default function Header() {
     <header
       className={cn(
         'fixed top-0 w-full z-50 transition-all duration-300',
-        isScrolled ? 'bg-white shadow-lg' : 'bg-white/95 backdrop-blur-sm'
+        isScrolled ? 'bg-gray-50 shadow-lg' : 'bg-gray-50/95 backdrop-blur-sm'
       )}
     >
-      <nav className="section-padding">
+      <nav className="section-padding" aria-label="Main navigation">
         <div className="flex items-center justify-between py-4 lg:py-6">
           {/* Logo */}
           <Link href="/" className="flex items-center space-x-2">
-            <Image
+            <img
               src="/images/logo.svg"
               alt="Musso & Frank Grill"
               width={180}
               height={60}
               className="h-12 w-auto lg:h-14"
-              priority
             />
           </Link>
 
@@ -71,6 +69,8 @@ export default function Header() {
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             className="lg:hidden p-2 rounded-md hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-heritage-gold"
             aria-label="Toggle menu"
+            aria-expanded={isMenuOpen}
+            aria-controls="mobile-menu"
           >
             <div className="w-6 h-6 flex flex-col justify-center space-y-1.5">
               <span
@@ -97,10 +97,12 @@ export default function Header() {
 
         {/* Mobile Navigation */}
         <div
+          id="mobile-menu"
           className={cn(
             'lg:hidden overflow-hidden transition-all duration-300',
             isMenuOpen ? 'max-h-96' : 'max-h-0'
           )}
+          aria-hidden={!isMenuOpen}
         >
           <div className="py-4 space-y-4">
             {navigation.map((item) => (

@@ -1,5 +1,4 @@
 import React from 'react'
-import Image from 'next/image'
 import Button from './Button'
 import { cn } from '@/lib/utils'
 
@@ -41,43 +40,47 @@ export default function Hero({
   }
 
   return (
-    <section className={cn('relative', heightClasses[height], className)}>
+    <section className={cn('hero-section', className)}>
       {/* Background Image */}
       <div className="absolute inset-0">
-        <Image
+        <img
           src={image}
           alt={imageAlt}
-          fill
-          className="object-cover"
-          priority
-          quality={95}
+          className="object-cover w-full h-full"
         />
         {overlay && (
-          <div className="absolute inset-0 bg-gradient-to-b from-rich-black/60 via-rich-black/40 to-rich-black/60" />
+          <>
+            {/* Desktop gradient */}
+            <div className="hidden md:block absolute inset-0 hero-gradient-desktop" />
+            {/* Tablet gradient */}
+            <div className="hidden sm:block md:hidden absolute inset-0 hero-gradient-tablet" />
+            {/* Mobile gradient */}
+            <div className="sm:hidden absolute inset-0 hero-gradient-mobile" />
+          </>
         )}
       </div>
 
       {/* Content */}
-      <div className="relative h-full flex items-center justify-center">
-        <div className="section-padding text-center max-w-4xl mx-auto py-20">
+      <div className="hero-content">
+        <div className="hero-content-inner">
           {subtitle && (
-            <p className="text-heritage-gold font-playfair text-lg lg:text-xl mb-4 animate-fade-in">
+            <p className="hero-label animate-fade-in">
               {subtitle}
             </p>
           )}
 
-          <h1 className="heading-xl text-white mb-6 text-shadow-xl animate-slide-up">
+          <h1 className="hero-title animate-slide-up">
             {title}
           </h1>
 
           {description && (
-            <p className="body-lg text-white/90 mb-8 text-shadow-lg animate-slide-up animation-delay-200">
+            <p className="hero-subtitle animate-slide-up animation-delay-200">
               {description}
             </p>
           )}
 
           {(primaryCTA || secondaryCTA) && (
-            <div className="flex flex-col sm:flex-row gap-4 justify-center animate-slide-up animation-delay-400">
+            <div className="hero-ctas animate-slide-up animation-delay-400">
               {primaryCTA && (
                 <Button
                   href={primaryCTA.href}
@@ -92,7 +95,6 @@ export default function Hero({
                   href={secondaryCTA.href}
                   size="lg"
                   variant="outline"
-                  className="border-white text-white hover:bg-white hover:text-rich-black"
                 >
                   {secondaryCTA.text}
                 </Button>
